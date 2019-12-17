@@ -10,16 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Estoque.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/produtos")]
     [ApiController]
     public class EstoqueController : ControllerBase
     {
-        private EstoqueContext _estoqueContext { get; set; }
         protected readonly EstoqueService _service;
 
-        public EstoqueController(EstoqueContext estoqueContext, EstoqueService service)
+        public EstoqueController( EstoqueService service)
         {
-            _estoqueContext = estoqueContext ?? throw new ArgumentNullException(nameof(estoqueContext));
             _service = service;
         }
 
@@ -28,11 +26,11 @@ namespace Estoque.API.Controllers
         /// </summary>
         /// <returns>Lista de estoque</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IList<EstoqueModel>), StatusCodes.Status200OK)]
-        public IActionResult Get()
+        public ActionResult Get()
         {
-            var queryConnect = _estoqueContext.Estoque.ToList();
-            return Ok(queryConnect);
+
+            var estoque = _service.Read();
+            return Ok(estoque);
         }
 
         /// <summary>
@@ -43,7 +41,7 @@ namespace Estoque.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEstoque(int id)
         {
-            var estoque = _estoqueContext.Estoque.Find(id);
+            var estoque = _service.GetEstoqueById(id);
 
             if(estoque == null)
             {

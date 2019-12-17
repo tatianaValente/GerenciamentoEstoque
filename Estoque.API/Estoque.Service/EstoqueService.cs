@@ -1,6 +1,8 @@
 ﻿using Estoque.Domain;
 using Estoque.Domain.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Estoque.Service
@@ -12,6 +14,28 @@ namespace Estoque.Service
         public EstoqueService(EstoqueContext estoqueContext)
         {
             _estoqueContext = estoqueContext ?? throw new ArgumentNullException(nameof(estoqueContext));
+        }
+
+        /// <summary>
+        /// Read Estoque
+        /// </summary>
+        /// <returns>Lista de estoque</returns>
+        public virtual IList<EstoqueModel> Read()
+        {
+            return _estoqueContext.Estoque.ToList();
+        }
+
+        /// <summary>
+        /// Get Estoque pelo id
+        /// </summary>
+        /// <param name="id">id do estoque</param>
+        /// <returns>O estoque encontrado,ou exceção ServiceException se não encontrado</returns>
+        public virtual EstoqueModel GetEstoqueById(int id)
+        {
+            EstoqueModel estoque = _estoqueContext.Estoque.Find(id);
+
+            //TODO excessão se nao encontrar
+            return estoque;
         }
 
         /// <summary>
@@ -46,19 +70,6 @@ namespace Estoque.Service
         }
 
         /// <summary>
-        /// Get Estoque pelo id
-        /// </summary>
-        /// <param name="id">id do estoque</param>
-        /// <returns>O estoque encontrado,ou exceção ServiceException se não encontrado</returns>
-        public virtual EstoqueModel GetEstoqueById(int id)
-        {
-            EstoqueModel estoque = _estoqueContext.Estoque.Find(id);
-
-            //TODO excessão se nao encontrar
-            return estoque;
-        }
-
-        /// <summary>
         /// Delete Estoque
         /// </summary>
         /// <param name="id">id do estoque</param>
@@ -73,6 +84,8 @@ namespace Estoque.Service
 
             return true;
         }
+
+  
 
 
     }

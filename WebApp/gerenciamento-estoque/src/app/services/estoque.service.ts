@@ -18,20 +18,20 @@ export class EstoqueService {
   get() {
     //return this.http.get<EstoqueModel[]>("./assets/mocks/estoque-list.json");
 
-    return this.http.get<EstoqueModel[]>(this.apiUrl);
+    return this.http.get<EstoqueModel[]>(`${this.apiUrl}/produtos`);
   }
 
   getById(id: number) {
     //return this.http.get<EstoqueModel[]>("./assets/mocks/estoque-list.json");
 
-    return this.http.get<EstoqueModel>(`${this.apiUrl}/${id}`);
+    return this.http.get<EstoqueModel>(`${this.apiUrl}/${id}/produtos`);
   }
 
   post(entity: EstoqueModel) {
     // return of(true).pipe(tap(() => this.get()));
 
     return this.http
-      .post<EstoqueModel>(this.apiUrl, entity, this.httpOptions)
+      .post<EstoqueModel>(`${this.apiUrl}/produtos`, entity, this.httpOptions)
       .pipe(tap(() => this.get()));
   }
 
@@ -39,7 +39,11 @@ export class EstoqueService {
     // return of(true).pipe(tap(() => this.get()));
 
     return this.http
-      .put<EstoqueModel>(`${this.apiUrl}?id=${id}`, entity, this.httpOptions)
+      .put<EstoqueModel>(
+        `${this.apiUrl}?id=${id}/produtos`,
+        entity,
+        this.httpOptions
+      )
       .pipe(tap(() => this.get()));
   }
 
@@ -47,7 +51,7 @@ export class EstoqueService {
     // return of(true).pipe(tap(() => this.get()));
 
     return this.http
-      .delete<EstoqueModel>(`${this.apiUrl}?id=${id}`)
+      .delete<EstoqueModel>(`${this.apiUrl}?id=${id}/produtos`)
       .pipe(tap(() => this.get()));
   }
 }
