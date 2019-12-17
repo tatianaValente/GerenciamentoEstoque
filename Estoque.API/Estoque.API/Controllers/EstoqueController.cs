@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Estoque.Domain;
 using Estoque.Domain.Model;
+using Estoque.Domain.Util;
 using Estoque.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,16 +42,11 @@ namespace Estoque.API.Controllers
         [HttpGet("{id}")]
         public IActionResult GetEstoque(int id)
         {
+            Validation.ValidarId(id);
             var estoque = _service.GetEstoqueById(id);
-
-            if(estoque == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(estoque);
-            }
+       
+            return Ok(estoque);
+            
         }
 
         /// <summary>
@@ -61,6 +57,8 @@ namespace Estoque.API.Controllers
         [HttpPost]
         public virtual async Task<ActionResult<EstoqueModel>> PostAsync([FromBody] EstoqueModel estoqueSave)
         {
+            Validation.ValidarQuantidade(estoqueSave.Quantidade);
+            Validation.ValidarValor(estoqueSave.Valor);
             EstoqueModel estoque = await _service.CreateAsync(estoqueSave);
             return Ok(estoque);
         }
@@ -68,13 +66,17 @@ namespace Estoque.API.Controllers
         /// <summary>
         /// Put atualizar estoque por Id
         /// </summary>
-        /// <param name="id">Identity Stop Condition</param>
-        /// <param name="estoque">The Stop Condition to update</param>
+        /// <param name="id">Id estoque</param>
+        /// <param name="estoque">Estoque a atualizar</param>
         /// <returns>Estoque atualizado</returns>
         [HttpPut]
         public virtual async Task<ActionResult<EstoqueModel>> PutAsync([FromQuery] int id, [FromBody] EstoqueModel estoqueSave)
         {
+            Validation.ValidarId(id);
+            Validation.ValidarQuantidade(estoqueSave.Quantidade);
+            Validation.ValidarValor(estoqueSave.Valor);
             EstoqueModel estoque = await _service.UpdateAsync(id, estoqueSave);
+
             return Ok(estoque);
         }
 
@@ -86,6 +88,7 @@ namespace Estoque.API.Controllers
         [HttpDelete]
         public virtual async Task<ActionResult> Delete([FromQuery] int id)
         {
+            Validation.ValidarId(id);
             var statusDelete = await _service.DeleteAsync(id);
             return Ok(statusDelete);
         }
