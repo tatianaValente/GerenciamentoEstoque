@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image mat-elevation-z3">
+      <mat-icon aria-label="Tabela de estoque">{{ icon }}</mat-icon>
+    </div>
+    <!-- <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle> -->
+    <mat-card-title>{{ screen }} PRODUTO AO ESTOQUE</mat-card-title>
+    <span class="example-spacer"></span>
+  </mat-card-header>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" name="addEditForm">
+    <!-- Nome -->
+    <div class="flex-row align-center">
+      <p class="m-r-16">Nome:</p>
+      <mat-form-field class="w-100" [appearance]="formConfig.appearance">
+        <input matInput formControlName="nome" placeholder="Nome do produto" />
+      </mat-form-field>
+    </div>
+
+    <div class="space-btw">
+      <!-- Quantidade -->
+      <div class="flex-row align-center">
+        <p class="m-r-16">Quantidade:</p>
+        <mat-form-field [appearance]="formConfig.appearance">
+          <input matInput formControlName="quantidade" numberOnly />
+        </mat-form-field>
+      </div>
+
+      <!-- Valor -->
+      <div class="flex-row align-center">
+        <p class="m-r-16">Valor:</p>
+        <mat-form-field [appearance]="formConfig.appearance">
+          <div class="flex-row align-center">
+            <span matPrefix>R$&nbsp;</span>
+            <input matInput type="number" formControlName="valor" />
+          </div>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+
+  <div class="flex">
+    <div class="flex">
+      <button
+        *ngIf="edit"
+        mat-icon-button
+        aria-label="delete"
+        (click)="delete()"
+        type="button"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <div class="w-100" *ngIf="form">
+      <mat-card-actions>
+        <ng-content></ng-content>
+        <span class="example-spacer"></span>
+        <button type="button" mat-button (click)="cancel()">
+          CANCELAR
+        </button>
+        <button
+          id="button-save"
+          mat-raised-button
+          color="primary"
+          [disabled]="form.invalid"
+          (click)="onSubmit()"
+        >
+          SALVAR
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+</mat-card>

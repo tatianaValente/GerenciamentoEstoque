@@ -1,0 +1,19 @@
+<div class="dp-flex">
+  <h1 mat-dialog-title class="tx-align-center">{{ data.title }}</h1>
+  <div mat-dialog-content class="tx-align-center">
+    <p>{{ data.text }}</p>
+  </div>
+</div>
+<div mat-dialog-actions class="button">
+  <button mat-button [mat-dialog-close]="false" cdkFocusInitial>
+    {{ data.btnCancelLabel }}
+  </button>
+  <button
+    [ngClass]="data.btnOkColor"
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+    {{ data.btnOkLabel }}
+  </button>
+</div>

@@ -1,0 +1,29 @@
+@import "src/styles.scss";
+
+mat-card-subtitle {
+  margin-bottom: 10px;
+}
+
+.header-image {
+  background: mat-color($primary);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+  transform: translateY(-25px);
+}
+
+.header-image mat-icon {
+  color: mat-contrast($primary, $primaryHue);
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+table {
+  width: 100%;
+}

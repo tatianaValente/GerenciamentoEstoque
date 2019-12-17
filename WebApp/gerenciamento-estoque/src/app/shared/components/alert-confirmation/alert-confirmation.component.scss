@@ -1,0 +1,30 @@
+@import "src/styles.scss";
+
+.dp-flex {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mat-dialog-title {
+  margin: 0;
+}
+.tx-align-center {
+  text-align: center;
+}
+
+.warn {
+  background-color: mat-color($warn);
+}
+
+.primary {
+  background-color: mat-color($primary);
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  align-items: center;
+}

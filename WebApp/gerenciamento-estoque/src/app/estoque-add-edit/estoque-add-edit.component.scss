@@ -1,0 +1,61 @@
+@import "src/styles.scss";
+
+mat-card-subtitle {
+  margin-bottom: 10px;
+}
+
+.header-image {
+  background: mat-color($primary);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 5px;
+  transform: translateY(-25px);
+}
+
+.header-image mat-icon {
+  color: mat-contrast($primary, $primaryHue);
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-card-actions {
+  display: flex;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.space-btw {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.m-r-16 {
+  margin-right: 16px;
+}
+
+.align-center {
+  align-items: baseline;
+}
