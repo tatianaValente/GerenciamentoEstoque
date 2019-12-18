@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Estoque.Service
 {
-    public class EstoqueService
+    public class EstoqueService : IEstoqueService
     {
         private EstoqueContext _estoqueContext { get; set; }
 
@@ -85,7 +85,7 @@ namespace Estoque.Service
             return true;
         }
 
-  
+
 
 
     }
